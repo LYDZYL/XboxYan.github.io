@@ -28,16 +28,17 @@
   //构建
   function construct(){
     for( var i = 0; i < len; i++ ){
-        var dot = {
+        var dot = {          
           isMouse : i===0,
           x : Math.random()*cx.width,
           y : Math.random()*cx.height,
-          r : i===0?0:Math.random()*3,
-          vx : Math.random()-.5,
-          vy : Math.random()-.5,
+          r : i===0?0:Math.random()*5,
+          v : 2,
+          ra : (Math.random()-.5)*2*Math.PI,
           c : Math.random()*10,
           cv : Math.random()+1,
         }
+        dot.v = dot.r===0?0:dot.v/(dot.r+1);
         dots.push(dot);
     }
     
@@ -63,31 +64,30 @@
         
         if(dot.x<0){
           dot.x = 0;
-          dot.vx *=-1;
+          dot.ra = -dot.ra;
         }
         if(dot.x>cx.width){
           dot.x = cx.width;
-          dot.vx *=-1;
+          dot.ra *=-1;
         }
         if(dot.y<0){
           dot.y = 0;
-          dot.vy *=-1;
+          dot.ra = Math.PI - dot.ra;
         }
         if(dot.y>cx.height){
           dot.y = cx.height;
-          dot.vy *=-1;
+          dot.ra = Math.PI - dot.ra;
         }
         //随机运动   
         dot.c += dot.cv;
-        if(dot.c > 250+Math.random()*10 ){
+        if(dot.c > 50+Math.random()*10 ){
             dot.cv = 1+Math.random(); 
             dot.c = Math.random()*10;
-            dot.vx = Math.random()-.5;
-            dot.vy = Math.random()-.5;
+            dot.ra += (Math.random()-.5)*Math.PI/3;
         }
         
-        dot.x += dot.vx;
-        dot.y += dot.vy;
+        dot.x += dot.v*Math.sin(dot.ra);
+        dot.y += dot.v*Math.cos(dot.ra);
         
     });
     render();
