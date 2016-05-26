@@ -19,7 +19,7 @@
   var len = 150;
   var mousePos = [0, 0];
   var easingFactor = 10;
-  var backgroundColor = 'rgba(0,0,0,0)';
+  var backgroundColor = 'rgba(0,0,0,0.5)';
   var dotColor = '#fff';
   var lineColor = '#fff';
   var lay = [15,7]
@@ -36,7 +36,13 @@
             var dot = {          
                 x : (cx.width/(m-2))*i+(Math.random()-.5)*100,
                 y : (cx.height/(n-2))*j+(Math.random()-.5)*100,
+                v : (Math.random()-.5)*1.5,
+                ra : (Math.random()-.5)*2*Math.PI,
+                _x : 0,
+                va : 0.01,
+                 
             }
+            dot._v = dot.v;
             dots.push(dot);
         }
     }
@@ -73,42 +79,17 @@
             }    
         })
     })
-    console.log(areas) 
+    console.log(dots) 
   }
   //运动
   function step(){
     dots.forEach(function(dot){
-        if(dot.isMouse){
-          dot.x += (mousePos[0] - dot.x);
-          dot.y += (mousePos[1] - dot.y) / easingFactor;
-        };
+        //随机运动
+        dot.ra+=dot.va;
+        dot.v=dot._v*Math.cos(dot.ra);
         
-        if(dot.x<0){
-          dot.x = 0;
-          dot.ra = -dot.ra;
-        }
-        if(dot.x>cx.width){
-          dot.x = cx.width;
-          dot.ra *=-1;
-        }
-        if(dot.y<0){
-          dot.y = 0;
-          dot.ra = Math.PI - dot.ra;
-        }
-        if(dot.y>cx.height){
-          dot.y = cx.height;
-          dot.ra = Math.PI - dot.ra;
-        }
-        //随机运动   
-        dot.c += dot.cv;
-        if(dot.c > 50+Math.random()*10 ){
-            dot.cv = 1+Math.random(); 
-            dot.c = Math.random()*10;
-            dot.ra += (Math.random()-.5)*Math.PI/3;
-        }
-        
-        dot.x += dot.v*Math.sin(dot.ra);
-        dot.y += dot.v*Math.cos(dot.ra);
+           
+        dot.x += dot.v;
         
     });
     render();
@@ -119,9 +100,9 @@
     ctx.clearRect(0,0,cx.width,cx.height);//清除
     //ctx.globalAlpha = 1;
     ctx.fillStyle = backgroundColor;
-    ctx.fillRect(0,0,cx.width,cx.height);
+    //ctx.fillRect(0,0,cx.width,cx.height);
     ctx.strokeStyle = '#333';
-    ctx.lineWidth = .5;
+    ctx.lineWidth = .3;
     areas.forEach(function(area){
       ctx.beginPath();
       ctx.moveTo(area[0].x,area[0].y);
@@ -150,6 +131,6 @@
 
   window.onresize(); // trigger the event manually.
   
-  //window.requestAnimationFrame(step);
+  window.requestAnimationFrame(step);
 
 </script>
