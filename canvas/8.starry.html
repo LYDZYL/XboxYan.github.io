@@ -111,11 +111,6 @@
     render();
   };
 
-  window.onmousemove = function (e) {
-    mousePos[0] = e.clientX - cx.offsetLeft;
-    mousePos[1] = e.clientY - cx.offsetTop;
-  }
-
   window.onresize(); // trigger the event manually.
   
   window.requestAnimationFrame(step);
