@@ -69,7 +69,7 @@
                 return item
             })
             if(k){
-                el.bg = 'rgba(0,0,0,'+(Math.random()*.4)+')';
+                el.bg = 'rgba(0,0,0,'+(Math.random()*.2)+')';
                 areas.push(el)
             }    
         })
@@ -110,11 +110,6 @@
 
     render();
   };
-
-  window.onmousemove = function (e) {
-    mousePos[0] = e.clientX - cx.offsetLeft;
-    mousePos[1] = e.clientY - cx.offsetTop;
-  }
 
   window.onresize(); // trigger the event manually.
   
