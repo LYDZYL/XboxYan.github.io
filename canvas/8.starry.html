@@ -8,7 +8,7 @@
     </style>
   </head>
   <body>
-  <canvas id="canvas" style="position:absolute;width:100%; height:100%; background:#2f62f7"></canvas>
+  <canvas id="canvas" style="position:absolute;width:100%; height:100%;"></canvas>
   
 
 </body></html>
@@ -22,37 +22,58 @@
   var backgroundColor = 'rgba(0,0,0,0)';
   var dotColor = '#fff';
   var lineColor = '#fff';
+  var lay = [15,7]
   var dots = [];//点
-  var lines = [];//线
+  var lines = [];
+  var areas = [];//线
   
   //构建
   function construct(){
-    for( var i = 0; i < len; i++ ){
-        var dot = {          
-          isMouse : i===0,
-          x : Math.random()*cx.width,
-          y : Math.random()*cx.height,
-          r : i===0?0:Math.random()*5,
-          v : 2,
-          ra : (Math.random()-.5)*2*Math.PI,
-          c : Math.random()*10,
-          cv : Math.random()+1,
+    var m = lay[0];
+    var n = lay[1];
+    for( var i = 0; i < m; i++ ){
+        for(var j = 0; j < n; j++){
+            var dot = {          
+                x : (cx.width/(m-2))*i+(Math.random()-.5)*100,
+                y : (cx.height/(n-2))*j+(Math.random()-.5)*100,
+            }
+            dots.push(dot);
         }
-        dot.v = dot.r===0?0:dot.v/(dot.r+1);
-        dots.push(dot);
     }
-    
-    dots.forEach(function(dot,m){  
-        dots.forEach(function(_dot,n){
-            if( n < m ){
-                var line = {
-                    from : dot,
-                    to : _dot
+    for( var i = 0; i < m; i++ ){
+        for(var j = 0; j < n; j++){
+            if( j%2 ) {
+                if( i%2 ){
+                    var line = [
+                          [dots[i*n+j],dots[i*n+j-1],dots[(i-1)*n+j]],
+                          [dots[i*n+j],dots[i*n+j-1],dots[(i+1)*n+j]],
+                          [dots[i*n+j],dots[i*n+j+1],dots[(i-1)*n+j]],
+                          [dots[i*n+j],dots[i*n+j+1],dots[(i+1)*n+j]],
+                      ]
+                }else{
+                    var line = [
+                          [dots[i*n+j],dots[i*n+j-1],dots[(i-1)*n+j-1]],
+                          [dots[i*n+j],dots[i*n+j-1],dots[(i+1)*n+j-1]],
+                          [dots[i*n+j],dots[i*n+j+1],dots[(i-1)*n+j+1]],
+                          [dots[i*n+j],dots[i*n+j+1],dots[(i+1)*n+j+1]],
+                      ]
                 }
-                lines.push(line);
-            } 
+                lines.push(line)
+            };
+            
+        }
+    }
+    lines.forEach(function(line){
+        line.forEach(function(el){
+            var k = el.every(function(item){
+                return item
+            })
+            if(k){
+                areas.push(el)
+            }    
         })
-    })   
+    })
+    console.log(areas) 
   }
   //运动
   function step(){
@@ -99,26 +120,16 @@
     //ctx.globalAlpha = 1;
     ctx.fillStyle = backgroundColor;
     ctx.fillRect(0,0,cx.width,cx.height);
-    ctx.fillStyle = dotColor;
-    dots.forEach(function(dot){
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = .5;
+    areas.forEach(function(area){
       ctx.beginPath();
-      ctx.arc(dot.x,dot.y,dot.r,0,2*Math.PI);
-      ctx.fill();
-    });
-    ctx.save();
-    lines.forEach(function(line){
-      var l = Math.sqrt(Math.pow((line.from.x - line.to.x), 2) + Math.pow((line.from.y - line.to.y), 2));
-      var maxl = cx.width / 8;
-      if( l > maxl) return;
-      ctx.strokeStyle = lineColor;
-      ctx.lineWidth = (1.0 - l / maxl) * 2;
-      ctx.globalAlpha = 1.0 - l / maxl;
-      ctx.beginPath();
-      ctx.moveTo(line.from.x,line.from.y);
-      ctx.lineTo(line.to.x,line.to.y);
+      ctx.moveTo(area[0].x,area[0].y);
+      ctx.lineTo(area[1].x,area[1].y);
+      ctx.lineTo(area[2].x,area[2].y);
+      ctx.closePath();
       ctx.stroke();
     });
-    ctx.restore();
   }
 
   window.onresize = function () {
@@ -139,6 +150,6 @@
 
   window.onresize(); // trigger the event manually.
   
-  window.requestAnimationFrame(step);
+  //window.requestAnimationFrame(step);
 
 </script>
