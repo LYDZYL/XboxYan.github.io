@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>波浪</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #canvas {
+            display: block;
+            border: 1px solid #ccc;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="300"></canvas>
+
+
+</body>
+
+</html>
+<script>
+    function Wave(opt){
+        this.cx = document.getElementById('canvas');
+        this.ctx = this.cx.getContext('2d');
+        this.opt = opt || {};
+        this.speed = this.opt.speed || 0.1;
+        
+        
+    }
+    //http://www.html5tricks.com/demo/html5-wave-animation/index.html
+    Wave.prototype = {
+        draw : function(){
+            
+        }
+    }
+
+</script>
