@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="500" height="300"></canvas>
+    <canvas id="canvas" width="1000" height="600"></canvas>
 
 
 </body>
@@ -31,6 +31,8 @@
     function Wave(opt){
         this.cx = document.getElementById('canvas');
         this.ctx = this.cx.getContext('2d');
+        this.width = this.cx.width;
+        this.height = this.cx.height;
         this.opt = opt || {};
         this.speed = this.opt.speed || 0.1;
         
@@ -38,9 +40,24 @@
     }
     //http://www.html5tricks.com/demo/html5-wave-animation/index.html
     Wave.prototype = {
+        _globalAttenuationFn: function(x){
+            return Math.pow(8/(8+Math.pow(x,4)),4);
+        },
         draw : function(){
-            
+            this.ctx.moveTo(0,0);
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = '#333';
+            var x, y;
+            for (var i=-2; i<=0; i+=0.01) {
+                x = this.width*((i+2)/2);
+                y = this.height/2 + 100* this._globalAttenuationFn(i) * Math.sin(9*i);
+                this.ctx.moveTo(x+1, y+1);
+                this.ctx.arc(x, y,2,0,2*Math.PI);
+            }
+            this.ctx.stroke();
         }
     }
-
+    
+    var SW = new Wave();
+    SW.draw();
 </script>
