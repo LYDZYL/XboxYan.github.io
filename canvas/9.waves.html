@@ -34,7 +34,7 @@
         this.width = this.cx.width;
         this.height = this.cx.height;
         this.opt = opt || {};
-        this.speed = this.opt.speed || 0.1;
+        this.speed = 0.1;
         
         
     }
@@ -43,21 +43,34 @@
         _globalAttenuationFn: function(x){
             return Math.pow(8/(8+Math.pow(x,4)),4);
         },
-        draw : function(){
+        step : function(){
+            this.ctx.clearRect(0, 0, this.width, this.height);
+            this.draw(0.8);
+            /*this.draw(0.9);
+            this.draw(0.8);
+            this.draw(0.7);
+            this.draw(0.6);
+            this.draw(0.5);*/
+
+            this.speed += 0.1;
+            requestAnimationFrame(this.step.bind(this));
+        },
+        draw : function(A){
             this.ctx.moveTo(0,0);
             this.ctx.beginPath();
             this.ctx.strokeStyle = '#333';
+            this.ctx.moveTo(0, 0);
             var x, y;
             for (var i=-2; i<=0; i+=0.01) {
                 x = this.width*((i+2)/2);
-                y = this.height/2 + 100* this._globalAttenuationFn(i) * Math.sin(9*i);
-                this.ctx.moveTo(x+1, y+1);
-                this.ctx.arc(x, y,2,0,2*Math.PI);
+                y = this.height/2 + 100* this._globalAttenuationFn(i) * Math.sin(9*i-this.speed)*A; 
+                this.ctx.lineTo(x,y)
+                //this.ctx.arc(x, y,2,0,2*Math.PI);
             }
             this.ctx.stroke();
         }
     }
     
     var SW = new Wave();
-    SW.draw();
+    SW.step();
 </script>
