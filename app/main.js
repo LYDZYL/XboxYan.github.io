@@ -33,7 +33,7 @@ class About extends React.Component{
 class Inbox extends React.Component{
     render() {
     	return (
-            <div>Inbox</div>
+            <div>Inbox！</div>
         )
     }
 }
