@@ -1,7 +1,7 @@
 function Starry(cx,ctx){
   this.cx = cx;
   this.ctx = ctx;
-  this.len = 100;
+  this.len = 70;
   this.mousePos = [0, 0];
   this.easingFactor = 10;
   this.backgroundColor = 'rgba(0,0,0,0)';
@@ -18,7 +18,7 @@ Starry.prototype = {
           isMouse : i===0,
           x : Math.random()*this.cx.width,
           y : Math.random()*this.cx.height,
-          r : i===0?0:Math.random()*5,
+          r : i===0?0:Math.random()*4,
           v : 2,
           ra : (Math.random()-.5)*2*Math.PI,
           c : Math.random()*10,
@@ -82,7 +82,7 @@ Starry.prototype = {
   render:function(){
     var _this = this;
     this.ctx.clearRect(0,0,this.cx.width,this.cx.height);//清除
-    //ctx.globalAlpha = 1;
+    this.ctx.globalAlpha = .5;
     this.ctx.fillStyle = this.backgroundColor;
     this.ctx.fillRect(0,0,this.cx.width,this.cx.height);
     this.ctx.fillStyle = this.dotColor;
@@ -98,7 +98,7 @@ Starry.prototype = {
       if( l > maxl) return;
       _this.ctx.strokeStyle = _this.lineColor;
       _this.ctx.lineWidth = (1.0 - l / maxl) * 2;
-      _this.ctx.globalAlpha = 1.0 - l / maxl;
+      _this.ctx.globalAlpha = (1.0 - l / maxl)*.5;
       _this.ctx.beginPath();
       _this.ctx.moveTo(line.from.x,line.from.y);
       _this.ctx.lineTo(line.to.x,line.to.y);

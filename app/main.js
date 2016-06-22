@@ -1,23 +1,59 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Router, Route, IndexRoute, hashHistory} from 'react-router';
-
+import { Router, Route, IndexLink, Link, IndexRoute, hashHistory} from 'react-router';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+//自定义
 import Header from './components/Header'
 import Home from './pages/Home'
 import About from './pages/About'
 import Info from './pages/Info'
 import Project from './pages/Project'
 import Message from './pages/Message'
+//注册tap事件
+injectTapEventPlugin();
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.state = {
+      open: false
+    };
+  }
+  handleToggle() {
+    this.setState({
+      open: !this.state.open
+    })
+  }
+
   render() {
-    let {children} = this.props
     return (
       <div>
-        <Header />
+        <Drawer
+          docked={false}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({ open }) }
+          >
+
+          <IndexLink to="/" className='link' activeClassName="active" onTouchTap={this.handleToggle}>
+            <MenuItem >Home</MenuItem>
+          </IndexLink>
+          <Link to="/Project" className='link' activeClassName="active"  onTouchTap={this.handleToggle}>
+            <MenuItem>Project</MenuItem>
+          </Link>
+          <Link to="/About" className='link' activeClassName="active" onTouchTap={this.handleToggle}>
+            <MenuItem>About</MenuItem>
+          </Link>
+          <Link to="/Info" className='link' activeClassName="active" onTouchTap={this.handleToggle}>
+            <MenuItem>Info</MenuItem>
+          </Link>
+        </Drawer>
+        <Header handleToggle={this.handleToggle} />
         <div className='box' style={{ border: '1px solid #ccc' }}>
-          {children}
+          {this.props.children}
         </div>
       </div>
     )
@@ -48,4 +84,3 @@ ReactDom.render(
     </Route>
   </Router>
   , document.getElementById('app'));
-
