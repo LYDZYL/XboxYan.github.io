@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>starry(无规则运动)</title>
-    <style>
-    html,body{margin: 0;padding: 0; }
-    </style>
-  </head>
-  <body>
-  <canvas id="canvas" style="position:absolute;width:100%; height:100%; background:#2f62f7"></canvas>
-  
-
-</body></html>
-<script>
-function Starry(){
-  
-  console.log(this)
-  this.cx = document.getElementById('canvas');
-  console.log(this.cx.getContext)
-  this.ctx = this.cx.getContext('2d');
+function Starry(cx,ctx){
+  this.cx = cx;
+  this.ctx = ctx;
   this.len = 100;
   this.mousePos = [0, 0];
   this.easingFactor = 10;
@@ -28,8 +10,7 @@ function Starry(){
   this.dots = [];//点
   this.lines = [];//线
 }
-Starry.prototype = {
-  
+Starry.prototype = {  
   construct:function(){
     var _this = this;
     for( var i = 0; i < this.len; i++ ){
@@ -126,26 +107,5 @@ Starry.prototype = {
     this.ctx.restore();
   }
 }
-var St = new Starry();
-    St.step();
 
-  window.onresize = function () {
-    St.cx.width = St.cx.clientWidth;
-    St.cx.height = St.cx.clientHeight;
-
-    if (St.dots.length == 0) {
-        St.construct();
-    }
-
-    St.render();
-  };
-
-  window.onmousemove = function (e) {
-    St.mousePos[0] = e.clientX - St.cx.offsetLeft;
-    St.mousePos[1] = e.clientY - St.cx.offsetTop;
-  }
-
-  window.onresize(); 
-  
-
-</script>
+module.exports = Starry
