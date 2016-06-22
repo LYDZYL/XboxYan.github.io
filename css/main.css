@@ -9,8 +9,7 @@ body,form,ul,ol,dl,dd,p{margin:0;}
 ul,ol{list-style-type:none; padding: 0;}
 img{border:0 none;vertical-align:middle;}
 button,input,select,textarea{font-size:1em; font-family: inherit; *font-family: 'microsoft yahei';}
-a{text-decoration:none;outline: 0;star:expression(this.onFocus=this.blur()); }
-a:-webkit-any-link { color: inherit}
+a{text-decoration:none;outline: 0;}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
 textarea{ overflow:auto; resize: vertical;}
 :active,:focus{ outline: 0;}
@@ -25,9 +24,12 @@ input::-ms-clear{display:none;}
 layout
 *
 */
+.subHeader{ font-size: 20px; padding: 16px; color: #fff; background: royalblue;}
 .link{display: block; transition: .3s;}
-.link.active{ background-color: rgba(0, 0, 0, 0.2)}
-
+.link.active{ background-color: rgba(0, 0, 0, 0.1)}
+.container{ border-top: 64px solid royalblue;}
+.home{ margin-top: -64px;}
+.canvasbg{ position: relative; height: 500px;}
 /*
 *
 *

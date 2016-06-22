@@ -5,6 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Router, Route, IndexLink, Link, IndexRoute, hashHistory} from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import {List, ListItem} from 'material-ui/List';
+import FontIcon from 'material-ui/FontIcon';
 //自定义
 import Header from './components/Header'
 import Home from './pages/Home'
@@ -33,26 +35,27 @@ class Main extends React.Component {
     return (
       <div>
         <Drawer
+          width={300}
           docked={false}
           open={this.state.open}
           onRequestChange={(open) => this.setState({ open }) }
           >
-
+          <div className='subHeader'>XboxYan</div>
           <IndexLink to="/" className='link' activeClassName="active" onTouchTap={this.handleToggle}>
-            <MenuItem >Home</MenuItem>
+            <ListItem primaryText="Home" leftIcon={<FontIcon className="material-icons">home</FontIcon>} />
           </IndexLink>
           <Link to="/Project" className='link' activeClassName="active"  onTouchTap={this.handleToggle}>
-            <MenuItem>Project</MenuItem>
+            <ListItem primaryText="Project" leftIcon={<FontIcon className="material-icons">apps</FontIcon>} />
           </Link>
           <Link to="/About" className='link' activeClassName="active" onTouchTap={this.handleToggle}>
-            <MenuItem>About</MenuItem>
+            <ListItem primaryText="About" leftIcon={<FontIcon className="material-icons">person_pin</FontIcon>} />
           </Link>
           <Link to="/Info" className='link' activeClassName="active" onTouchTap={this.handleToggle}>
-            <MenuItem>Info</MenuItem>
+            <ListItem primaryText="Info" leftIcon={<FontIcon className="material-icons">info</FontIcon>} />
           </Link>
         </Drawer>
         <Header handleToggle={this.handleToggle} />
-        <div className='box' style={{ border: '1px solid #ccc' }}>
+        <div className='container'>
           {this.props.children}
         </div>
       </div>
