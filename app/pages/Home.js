@@ -25,8 +25,13 @@ class Home extends React.Component {
     return (
       <div className='home'>
         <div className='canvasbg'>
-            <canvas id='canvas' style={{ position:'absolute',top:'0px',zIndex:-1, width: '100%', height: '100%' ,background:'royalblue'}}></canvas>
-            <div><img src='../../img/xboxyan.jpg' /></div>
+            <canvas id='canvas'></canvas>
+            <div className ='head'>
+              <span>
+                <img src='img/xboxyan.jpg' />
+              </span>
+              <h2>XboxYan</h2>
+            </div>
         </div>
       </div>
     )
