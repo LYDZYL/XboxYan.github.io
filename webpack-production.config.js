@@ -4,12 +4,22 @@ module.exports = {
     //插件项
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('common.js'),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
+            output: {
+                comments: false,  // remove all comments
+            },
             compress: {
                 // supresses warnings, usually from module minification
                 warnings: false
             }
-        })
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify("production"),
+            },
+        }),
     ],
     //页面入口文件配置
     entry: [
