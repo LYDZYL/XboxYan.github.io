@@ -24,12 +24,17 @@ input::-ms-clear{display:none;}
 layout
 *
 */
-.subHeader{ font-size: 20px; padding: 16px; color: #fff; background: royalblue;}
+.subHeader{ font-size: 20px; padding: 16px; color: #fff; background: dodgerblue;}
 .link{display: block; transition: .3s;}
 .link.active{ background-color: rgba(0, 0, 0, 0.1)}
-.container{ border-top: 64px solid royalblue;}
-.home{ margin-top: -64px;}
+.container{ border-top: 64px solid dodgerblue;}
+.home{ }
 .canvasbg{ position: relative; height: 500px;}
+#canvas{position:absolute;top:0;width: 100%;height: 100% ;background:dodgerblue}
+.head{ text-align: center; position: relative; z-index: 2; top: 50%; transform: translateY(-50%)}
+.head span{ display: inline-block; width: 150px; height: 150px; border: 2px solid #fff; border-radius: 50%; overflow: hidden;}
+.head img{ width: 100%;}
+.head h2{ font-size: 30px; color: #fff; margin-top: 10px;}
 /*
 *
 *
