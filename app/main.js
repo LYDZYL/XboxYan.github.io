@@ -1,50 +1,50 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import React from 'react';
+import ReactDom from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Router, Route, IndexRoute, hashHistory} from 'react-router';
 
-// 首先我们需要导入一些组件...
-import { Router, Route, Link } from 'react-router'
-import { hashHistory } from 'react-router'
-// 然后我们从应用中删除一堆代码和
-// 增加一些 <Link> 元素...
-class App extends React.Component{
+import Header from './components/Header'
+import Home from './pages/Home'
+import About from './pages/About'
+import Info from './pages/Info'
+import Project from './pages/Project'
+import Message from './pages/Message'
+
+class Main extends React.Component {
   render() {
+    let {children} = this.props
     return (
       <div>
-        <h1>App</h1>
-        {/* 把 <a> 变成 <Link> */}
-        <ul>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/inbox">Inbox</Link></li>
-        </ul>
-        {this.props.children}
+        <Header />
+        <div className='box' style={{ border: '1px solid #ccc' }}>
+          {children}
+        </div>
       </div>
     )
   }
 }
 
-class About extends React.Component{
-    render() {
-    	return (
-            <div>About</div>
-        )
-    }
+class App extends React.Component {
+  render() {
+    return (
+      <MuiThemeProvider>
+        <Main {...this.props} />
+      </MuiThemeProvider>
+    )
+  }
 }
 
-class Inbox extends React.Component{
-    render() {
-    	return (
-            <div>Inbox！</div>
-        )
-    }
-}
-
-// 最后，我们用一些 <Route> 来渲染 <Router>。
-// 这些就是路由提供的我们想要的东西。
 ReactDom.render(
   <Router history={hashHistory} >
     <Route path="/" component={App}>
-      <Route path="about" component={About} />
-      <Route path="inbox" component={Inbox} />
+      <IndexRoute component={Home} />
+      <Route path="home" component={Home}/>
+      <Route path="project" component={Project}/>
+      <Route path="about" component={About}/>
+      <Route path="info" component={Info} >
+        <IndexRoute component={Message} />
+        <Route path="messages/:id" component={Message} />
+      </Route>
     </Route>
   </Router>
-, document.getElementById('app'));
+  , document.getElementById('app'));
