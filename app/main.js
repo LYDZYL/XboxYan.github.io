@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDom from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -58,7 +57,7 @@ class App extends React.Component {
     if (this.state.loading) {
       console.log('333333333')
       return (
-        <div>正在加载...</div>
+        <div>正在加载中...</div>
       )
     }else{
       console.log('44444')

@@ -1,6 +1,4 @@
-import React from 'react'
-import { IndexLink, Link } from 'react-router'
-
+import { IndexLink, Link } from 'react-router';
 
 class Info extends React.Component {
   render() {

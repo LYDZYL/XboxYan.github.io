@@ -1,4 +1,3 @@
-import React from 'react';
 import Starry from '../canvas/Starry';
 
 class Home extends React.Component {
@@ -15,9 +14,10 @@ class Home extends React.Component {
       }
       St.render();
     };
+    console.log(cx.offsetTop)
     cx.onmousemove = function (e) {
-      St.mousePos[0] = e.clientX - St.cx.offsetLeft;
-      St.mousePos[1] = e.clientY - St.cx.offsetTop;
+      St.mousePos[0] = e.clientX - cx.offsetLeft;
+      St.mousePos[1] = e.clientY - 64;
     }
     window.onresize();
   }

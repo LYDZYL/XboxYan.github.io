@@ -1,4 +1,3 @@
-import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import { IndexLink, Link } from 'react-router';
 import { ListItem } from 'material-ui/List';

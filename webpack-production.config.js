@@ -1,11 +1,16 @@
 var path = require('path');
 var webpack = require('webpack');
-module.exports = {
+var node_modules_dir = path.join(__dirname, 'node_modules');
+
+var config = {
     //插件项
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('common.js'),
+        new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.ProvidePlugin({
+            React: "react"
+        }),
         new webpack.optimize.UglifyJsPlugin({
             output: {
                 comments: false,  // remove all comments
@@ -22,13 +27,19 @@ module.exports = {
         }),
     ],
     //页面入口文件配置
-    entry: [
-        path.resolve(__dirname, 'app/main.js')
-    ],
+    entry:{
+        index:path.resolve(__dirname, 'app/main.js'),
+        vendor: [
+          'react',
+          'react-dom',
+          'react-router',
+          'material-ui'
+        ]
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: "/build/",
-        filename: 'bundle.js',
+        filename: '[name].js',
     },
     module: {
         //加载器配置
@@ -51,3 +62,5 @@ module.exports = {
         ]
     }
 };
+
+module.exports = config;
