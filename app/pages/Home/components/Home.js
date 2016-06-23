@@ -1,4 +1,4 @@
-import Starry from '../canvas/Starry';
+import Starry from '../../../canvas/Starry';
 
 class Home extends React.Component {
   componentDidMount() {

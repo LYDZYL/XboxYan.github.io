@@ -1,9 +1,11 @@
 class About extends React.Component {
   render() {
     return (
-      <div>About!!!</div>
+      <div>
+        <h2>About!!!!!</h2>
+      </div>
     )
   }
 }
 
-module.exports = About 
+module.exports = About

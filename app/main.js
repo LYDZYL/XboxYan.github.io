@@ -1,7 +1,7 @@
 import ReactDom from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Router, Route,Redirect, IndexLink, Link, IndexRoute, hashHistory} from 'react-router';
+import { Router, hashHistory} from 'react-router';
 //自定义
 import Header from './components/Header';
 import Side from './components/Side';
@@ -71,18 +71,21 @@ class App extends React.Component {
   }
 }
 
+const rootRoute = {
+  component: 'div',
+  childRoutes: [ {
+    path: '/',
+    component: App,
+    childRoutes: [
+      require('./pages/Home'),
+      require('./pages/Project'),
+      require('./pages/About'),
+      require('./pages/Info')
+    ]
+  } ]
+}
+
 ReactDom.render(
-  <Router history={hashHistory} >
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="home" component={Home}/>
-      <Route path="project" component={Project}/>
-      <Route path="about" component={About}/>
-      <Route path="info" >
-        <IndexRoute component={Info} />
-        <Route path="messages/:id" component={Message} />
-      </Route>
-      <Route path="*" component={()=><div>地址有误！！！</div>} />
-    </Route>
-  </Router>
-  , document.getElementById('app'));
+  <Router history={hashHistory} routes={rootRoute} />, 
+  document.getElementById('app')
+);
