@@ -1,7 +1,7 @@
 import ReactDom from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Router, Route, IndexLink, Link, IndexRoute, hashHistory} from 'react-router';
+import { Router, Route,Redirect, IndexLink, Link, IndexRoute, hashHistory} from 'react-router';
 //自定义
 import Header from './components/Header';
 import Side from './components/Side';
@@ -78,10 +78,11 @@ ReactDom.render(
       <Route path="home" component={Home}/>
       <Route path="project" component={Project}/>
       <Route path="about" component={About}/>
-      <Route path="info" component={Info} >
-        <IndexRoute component={Message} />
+      <Route path="info" >
+        <IndexRoute component={Info} />
         <Route path="messages/:id" component={Message} />
       </Route>
+      <Route path="*" component={()=><div>地址有误！！！</div>} />
     </Route>
   </Router>
   , document.getElementById('app'));

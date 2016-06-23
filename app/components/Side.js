@@ -16,13 +16,13 @@ class Side extends React.Component {
           <IndexLink to="/" className='link' activeClassName="active" onTouchTap={this.props.handleToggle}>
             <ListItem primaryText="Home" leftIcon={<FontIcon className="material-icons">home</FontIcon>} />
           </IndexLink>
-          <Link to="/Project" className='link' activeClassName="active"  onTouchTap={this.props.handleToggle}>
+          <Link to="/project" className='link' activeClassName="active"  onTouchTap={this.props.handleToggle}>
             <ListItem primaryText="Project" leftIcon={<FontIcon className="material-icons">apps</FontIcon>} />
           </Link>
-          <Link to="/About" className='link' activeClassName="active" onTouchTap={this.props.handleToggle}>
+          <Link to="/about" className='link' activeClassName="active" onTouchTap={this.props.handleToggle}>
             <ListItem primaryText="About" leftIcon={<FontIcon className="material-icons">person_pin</FontIcon>} />
           </Link>
-          <Link to="/Info" className='link' activeClassName="active" onTouchTap={this.props.handleToggle}>
+          <Link to="/info" className='link' activeClassName="active" onTouchTap={this.props.handleToggle}>
             <ListItem primaryText="Info" leftIcon={<FontIcon className="material-icons">info</FontIcon>} />
           </Link>
         </Drawer>

@@ -8,15 +8,14 @@ class Message extends React.Component {
 
   componentDidMount() {
     // from the path `/inbox/messages/:id`
-    const id = this.props.params.id
 
-    fetchMessage(id, function (err, message) {
+    /*fetchMessage(id, function (err, message) {
       this.setState({ message: message })
-    })
+    })*/
   }
   render() {
     return (
-      <div>Message{this.state.message}</div>
+      <div>Message{this.props.params.id}</div>
     )
   }
 }
