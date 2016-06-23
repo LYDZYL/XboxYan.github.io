@@ -5,11 +5,8 @@ import { Router, hashHistory} from 'react-router';
 //自定义
 import Header from './components/Header';
 import Side from './components/Side';
-import Home from './pages/Home';
-import About from './pages/About';
-import Info from './pages/Info';
-import Project from './pages/Project';
-import Message from './pages/Message';
+
+let Home = require('./pages/Home');
 //注册tap事件
 injectTapEventPlugin();
 
@@ -72,17 +69,15 @@ class App extends React.Component {
 }
 
 const rootRoute = {
-  component: 'div',
-  childRoutes: [ {
     path: '/',
     component: App,
+    indexRoute: require('./pages/Home'),
     childRoutes: [
       require('./pages/Home'),
       require('./pages/Project'),
       require('./pages/About'),
       require('./pages/Info')
     ]
-  } ]
 }
 
 ReactDom.render(
