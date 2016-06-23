@@ -25,8 +25,7 @@ var config = {
         vendor: [
           'react',
           'react-dom',
-          'react-router',
-          'material-ui'
+          'react-router'
         ]
     },
     devServer: {
