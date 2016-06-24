@@ -1,12 +1,11 @@
 import ReactDom from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Router, hashHistory} from 'react-router';
+import { Router, browserHistory} from 'react-router';
 //自定义
 import Header from './components/Header';
 import Side from './components/Side';
 
-let Home = require('./pages/Home');
 //注册tap事件
 injectTapEventPlugin();
 
@@ -73,14 +72,14 @@ const rootRoute = {
     component: App,
     indexRoute: require('./pages/Home'),
     childRoutes: [
-      require('./pages/Home'),
       require('./pages/Project'),
       require('./pages/About'),
-      require('./pages/Info')
+      require('./pages/Info'),
+      require('./pages/NotFound')
     ]
 }
 
 ReactDom.render(
-  <Router history={hashHistory} routes={rootRoute} />, 
+  <Router history={browserHistory} routes={rootRoute} />, 
   document.getElementById('app')
 );

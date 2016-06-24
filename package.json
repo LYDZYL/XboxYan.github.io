@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "React && Webpack",
   "scripts": {
-    "start": "webpack-dev-server --config webpack-dev-server.config.js --progress --hot --colors",
+    "start": "webpack-dev-server --config webpack-dev-server.config.js --progress --hot --colors --history-api-fallback",
     "build": "webpack --config webpack-production.config.js --progress --colors"
   },
   "author": "yanwenbin",

@@ -24,7 +24,7 @@ input::-ms-clear{display:none;}
 layout
 *
 */
-.subHeader{ font-size: 20px; padding: 16px; color: #fff; background: dodgerblue;}
+.subHeader{ font-size: 20px; padding:0 16px; line-height: 64px; color: #fff; background: dodgerblue;}
 .link{display: block; transition: .3s;}
 .link.active{ background-color: rgba(0, 0, 0, 0.1)}
 .container{ border-top: 64px solid dodgerblue;}
